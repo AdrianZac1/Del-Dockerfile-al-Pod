@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reto-integrador
+  namespace: example
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: reto-integrador
+  template:
+    metadata:
+      labels:
+        app: reto-integrador
+    spec:
+      initContainers:
+      - name: preparacion
+        image: busybox:1.36
+        command: ["sh", "-c", "echo Preparando aplicacion; sleep 3; echo Inicializacion completada"]
+      containers:
+      - name: api
+        image: miusuario/reto:1.0
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 9090
+        env:
+        - name: ENTORNO
+          value: "prod"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9090
+          initialDelaySeconds: 2
+          periodSeconds: 5
+      - name: monitor
+        image: busybox:1.36
+        command: ["sh", "-c"]
+        args:
+        - "while true; do date; wget -qO- http://localhost:9090/; echo; sleep 10; done"

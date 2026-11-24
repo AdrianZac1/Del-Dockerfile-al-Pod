@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thoughts-api
+  namespace: example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: thoughts-api
+  template:
+    metadata:
+      labels:
+        app: thoughts-api
+    spec:
+      containers:
+      - name: api
+        image: miusuario/thoughts-api:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000

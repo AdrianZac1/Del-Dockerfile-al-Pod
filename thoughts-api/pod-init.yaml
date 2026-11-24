@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: thoughts-con-init
+  namespace: example
+spec:
+  initContainers:
+  - name: preparar-config
+    image: busybox:1.36
+    command: ["sh", "-c", "echo 'APP_VERSION=v1-init' > /config/app.env; sleep 5"]
+    volumeMounts:
+    - name: config
+      mountPath: /config
+  containers:
+  - name: api
+    image: miusuario/thoughts-api:v1
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 8000
+    command: ["sh", "-c"]
+    args: [". /config/app.env && export APP_VERSION && python app.py"]
+    volumeMounts:
+    - name: config
+      mountPath: /config
+  volumes:
+  - name: config
+    emptyDir: {}

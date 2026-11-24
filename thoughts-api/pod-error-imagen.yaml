@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: thoughts-error-imagen
+  namespace: example
+spec:
+  containers:
+  - name: api
+    image: miusuario/thoughts-api:v9
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 8000

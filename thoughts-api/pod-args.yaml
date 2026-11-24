@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: thoughts-args
+  namespace: example
+spec:
+  restartPolicy: Never
+  containers:
+  - name: api
+    image: miusuario/thoughts-api:v1
+    imagePullPolicy: Never
+    args: ["python", "-c", "print('hola')"]
