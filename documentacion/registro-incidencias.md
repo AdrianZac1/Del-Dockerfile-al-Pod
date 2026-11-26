@@ -29,3 +29,18 @@
 | 025 | Accidental | .gitignore y documentacion dentro de thoughts-api; mover a raíz. |
 
 Todas las incidencias accidentales quedaron corregidas. Los fallos controlados son ejercicios de diagnóstico y no defectos pendientes del reto. La advertencia Flask y el favicon pueden repetirse. El mensaje inicial del ejercicio 9D no quedó registrado; sí se comprobó su recuperación.
+
+
+## Evidencia complementaria: cuatro etapas
+
+| ID | Tipo | Hallazgo y resolución |
+|---|---|---|
+| 026 | Advertencia | Git avisó de conversión LF/CRLF; el commit anterior se completó. |
+| 027 | Accidental | Caracteres incorrectos en CMD; usar chcp 65001. |
+| 028 | Accidental | Dockerfile.txt; renombrar a Dockerfile. |
+| 029 | Accidental | Respuesta HTTP copiada como comando; ejecutar curl y distinguir salida. |
+| 030 | Advertencia | Tres fallos iniciales de readiness por conexión rechazada; esperar disponibilidad. Se resolvió sin reinicios. |
+| 031 | Controlado | Imagen avalos-9.9 inexistente con Never; aplicar pod-recuperado.yaml con avalos-1.0. |
+| 032 | Accidental | ls-1 no reconocido; corregir a ls -l. |
+
+Total histórico: 32 incidencias, advertencias y observaciones. Los fallos controlados no son defectos pendientes. El servidor Flask continúa siendo de desarrollo.

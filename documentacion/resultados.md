@@ -28,3 +28,16 @@ Thoughts API 3/3 y reto-integrador 2/2. Siete Pods Running y dos Completed en la
 
 ## Mantenimiento del repositorio
 La imagen cmd-error fue reconstruida en 2.5 s, ID 3c3385f254f3. Se corrigió pod-error-cmd.yaml para referenciarla y se verificó el manifiesto mediante dry-run y el comando incorrecto mediante docker inspect. La prueba negativa original no se repitió.
+
+
+## Evidencia complementaria: cuatro etapas
+
+| Etapa | Resultado observado |
+|---|---|
+| 1 | Flask 3.0.3; Python Alpine; imagen miapp:avalos-1.0, ID ffccfd552413; build 4.4 s; disco 108 MB, contenido 26.2 MB. |
+| 2 | Puerto local 9091 hacia 9090; HTTP 200; CPU 0.02%, memoria 21.18 MiB, 0.56%, un proceso en la muestra; modificación local no alteró imagen ni contenedor. |
+| 3 | Docker Desktop Kubeadm; namespace k8s-avalos; imagen local confirmada por eventos; Pod 1/1 Running, IP 10.1.0.44, cero reinicios. Requests 100m/64Mi, limits 250m/128Mi. |
+| 4 | Pod miapp-fallo con imagen inexistente: ErrImageNeverPull, 26 ocurrencias y 12 Failed reportadas. Pod principal respondió HTTP 200 durante las comprobaciones. Corrección mediante apply, sin borrar el Pod ni reconstruir imagen. |
+| Final | Ambos Pods 1/1 Running, cero reinicios, IP 10.1.0.44 y 10.1.0.45. Deployments originales reto-integrador 2/2 y thoughts-api 3/3. |
+
+El Pod defectuoso fue creado a las 18:37:46 y su contenedor corregido inició a las 18:43:23 (hora local), intervalo de 5 min 37 s que incluye el diagnóstico. No es una medición exclusiva de recuperación. Las peticiones exitosas demuestran aislamiento del fallo en las comprobaciones, no disponibilidad continua ni balanceo. El contenedor temporal de Docker fue eliminado conservando la imagen; se observó exit 137 al detenerlo, sin determinar la causa exacta.

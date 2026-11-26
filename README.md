@@ -67,3 +67,13 @@ Las imágenes de la aplicación son locales y usan imagePullPolicy Never. El cl�
 
 ## Conclusión
 La práctica permitió comprender la transición de una imagen Docker a una aplicación orquestada, la separación entre imagen y configuración, y el diagnóstico y recuperación de contenedores mediante Kubernetes.
+
+
+## Evidencia complementaria: cuatro etapas
+
+Nueva evidencia del 25 de noviembre de 2026: aplicación Flask propia, imagen `miapp:avalos-1.0`, contenedor, Pod y diagnóstico de fallo aislado.
+
+- [Procedimiento completo](evidencia-final/README.md)
+- [Guion definitivo](documentacion/guion-video-final.md)
+- [Resultados](documentacion/resultados.md)
+- [Incidencias](documentacion/registro-incidencias.md)

@@ -107,3 +107,8 @@ Verificar por port-forward y curl antes y después del rollback. El manifiesto l
 
 ## Reto final
 Seguir README. Para autorrecuperación, observar `kubectl get pods -n example -l app=reto-integrador -w` en otra terminal, eliminar un Pod actual por nombre, comprobar rollout y consultar logs de preparacion y monitor. Recrear el port-forward si estaba conectado al Pod eliminado.
+
+
+## Evidencia complementaria: cuatro etapas
+
+Consultar [procedimiento de las cuatro etapas](../evidencia-final/README.md). Los manifiestos de fallo y recuperación se aplican por separado, nunca todos juntos.
